@@ -11,7 +11,7 @@ app.get('/',(req, res) =>{
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', require('./routes/createUser'))
+app.use('/api', require('./Routes/createUser'))
 
 app.listen(port, ()=>{
     console.log(port)
