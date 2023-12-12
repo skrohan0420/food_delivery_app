@@ -6,9 +6,12 @@ mongoDB();
 
 
 app.get('/',(req, res) =>{
-
     res.send('works')
 })
+
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', require('./routes/createUser'))
 
 app.listen(port, ()=>{
     console.log(port)
