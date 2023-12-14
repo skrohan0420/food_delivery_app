@@ -30,7 +30,7 @@ function Carousel() {
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src="https://source.unsplash.com/random/300×600/?rice" className="d-block w-100" alt="..." style={{ "maxHeight": "500px" }} />
+                    <img src="https://source.unsplash.com/random/300×600/?curry" className="d-block w-100" alt="..." style={{ "maxHeight": "500px" }} />
                     <div className="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
