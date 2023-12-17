@@ -6,7 +6,12 @@ const mongoDB = () => {
 
     mongoose.connect(dbURI)
         .then(result => {
-            console.log('---- DB Connected')
+
+            if(result){
+                console.log('---- DB Connected')
+            }else{
+                console.log('---- DB Not Connected')
+            }
         })
         .catch(err => console.log(err));
 }
