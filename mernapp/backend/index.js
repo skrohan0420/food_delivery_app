@@ -17,7 +17,8 @@ app.use((req,res,next)=>{
 })
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', require('./Routes/createUser'))
+app.use('/api', require('./Routes/user'))
+app.use('/api', require('./Routes/food'))
 
 
 app.get('/',(req, res) =>{

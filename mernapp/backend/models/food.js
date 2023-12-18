@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const FoodItemsSchema = new Schema({
-    CategoryName: {
+    categoryName: {
         type: String,
         required: true,
     },
@@ -25,14 +25,14 @@ const FoodItemsSchema = new Schema({
 }, { timestamps: true });
 
 const FoodCategorySchema = new Schema({
-    CategoryName: {
+    categoryName: {
         type: String,
         required: true,
     },
-}, { timestamps: true });
+},{ timestamps: true });
 
 const items = mongoose.model('food_items', FoodItemsSchema);
-const category = mongoose.model('food_category', FoodCategorySchema);
+const category = mongoose.model('food_categories', FoodCategorySchema);
 
 module.exports = {
     items,
