@@ -1,13 +1,19 @@
 import React from 'react'
 
-function Card() {
+function Card(props) {
+
+    const { data } = props
+
+    let options = data.options[0]
+    let priceOption = Object.keys(options)
+
     return (
 
         <div className="card mt-3" style={{ "width": "18rem", "maxHeight": "fitContent" }}>
-            <img src="https://source.unsplash.com/random/100×100/?burger" className="card-img-top" alt="..." style={{"height":"200px"}}/>
+            <img src={data.img} className="card-img-top" alt="..." style={{ "height": "200px" }} />
             <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 className="card-title">{data.name}</h5>
+                <p className="card-text">{data.description}</p>
                 <div className='container w-100 d-flex'>
                     <select className='m-1 h-100 w-50 bg-success'>
                         {
@@ -20,10 +26,11 @@ function Card() {
                     </select>
                     <select className='m-1 h-100 w-50 bg-success'>
                         {
-                            Array.from(Array(2), (e, i) => {
+                            priceOption.map((price) => {
                                 return (
-                                    <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                    <option key={price} value={price}>{price}</option>
                                 )
+
                             })
                         }
                     </select>
