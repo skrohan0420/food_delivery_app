@@ -1,21 +1,46 @@
-import React from 'react'
+import React, { useEffect, useRef, useState  } from 'react'
+import { useDispatchCart, useCart } from './ContextReducer'
 
 function Card(props) {
 
-    const { data } = props
-
+    const data = props.data
+    let dispatch = useDispatchCart()
+    let cartData = useCart();
     let options = data.options[0]
     let priceOption = Object.keys(options)
+    const priceRef =  useRef()
+
+    const [qty, setQty] = useState(1)
+    const [size, setSize] = useState('')
+
+    const handleAddToCart = async () => {
+        await dispatch({
+            type: "ADD", 
+            id: data._id,
+            name: data.name,
+            image: data.img,
+            price: finalPrice,
+            qty: qty,
+            size: size
+        })
+        console.log(cartData)
+    }
+    let finalPrice = qty * parseInt(options[size])
+
+    useEffect(()=>{
+        setSize(priceRef.current.value)
+    }, [])
 
     return (
 
-        <div className="card mt-3" style={{ "width": "18rem", "maxHeight": "fitContent" }}>
+        <div className="card mt-3 justify-center d-flex" style={{ "width": "18rem", "maxHeight": "fitContent" }}>
             <img src={data.img} className="card-img-top" alt="..." style={{ "height": "200px" }} />
             <div className="card-body">
-                <h5 className="card-title">{data.name}</h5>
+                <h2 className="card-title text-success">{data.name}</h2>
                 <p className="card-text">{data.description}</p>
-                <div className='container w-100 d-flex'>
-                    <select className='m-1 h-100 w-50 bg-success'>
+                <hr/>
+                <div className='d-flex'>
+                    <select className='m-1 h-100 w-50 bg-success' ref={priceRef} onChange={(e)=>setQty(e.target.value)} >
                         {
                             Array.from(Array(6), (e, i) => {
                                 return (
@@ -24,21 +49,26 @@ function Card(props) {
                             })
                         }
                     </select>
-                    <select className='m-1 h-100 w-50 bg-success'>
+                    <select className='m-1 h-100 w-50 bg-success' ref={priceRef} onChange={(e)=>setSize(e.target.value)} >
                         {
                             priceOption.map((price) => {
                                 return (
-                                    <option key={price} value={price}>{price}</option>
+                                    <option key={price} value={price}>{price.toUpperCase()}</option>
                                 )
 
                             })
                         }
                     </select>
-                    <div className='d-inline h-100'>
-                        Price
-                    </div>
                 </div>
+                <h4 className='d-flex m-1 '>
+                    Total Price : {finalPrice ? finalPrice : 0}/-
+                </h4>
             </div>
+            <button
+                className='btn btn-success justify-center m-1 fs-4 fw-bold text-white'
+                onClick={handleAddToCart}>
+                Add To Cart
+            </button>
         </div>
 
     )

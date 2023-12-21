@@ -93,7 +93,7 @@ export default function Home() {
                     </button>
                 </div>
             </div>
-            <div className='container'>
+            <div className='container flex justify-center'>
                 {
                     foodCat
                         ?
@@ -111,7 +111,7 @@ export default function Home() {
                                                 .filter((item) => (item.categoryName === cat.categoryName) && (item.name.toLowerCase().includes(search.toLocaleLowerCase())))
                                                 .map((food) => {
                                                     return (
-                                                        <div key={food._id} className='col-12 col-md-6 col-lg-3 m-1'>
+                                                        <div key={food._id} className='col-12 col-md-6 col-lg-3 m-2'>
                                                             <Card data={food} />
                                                         </div>
                                                     )
