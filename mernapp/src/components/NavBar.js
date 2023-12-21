@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../App.css'
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge'
+import Modal from '../Modal';
+import Cart from '../screens/Cart';
+import { useCart } from './ContextReducer';
+
 export default function NavBar() {
+    let data = useCart();
+
+    const [cartView, setCartView] = useState(false);
 
     const navigate = useNavigate()
-    const handleLogout = () =>{
+    const handleLogout = () => {
         localStorage.removeItem('authToken')
         navigate('/login')
     }
@@ -48,10 +55,19 @@ export default function NavBar() {
                                             <div className="nav-link btn bg-white text-success m-1" onClick={handleLogout}>logout</div>
                                         </li>
                                         <li className="nav-item">
-                                            <div className="nav-link btn bg-white text-success m-1">
+                                            <div
+                                                className="nav-link btn bg-white text-success m-1"
+                                                onClick={() => { setCartView(true) }}>
                                                 Cart{' '}
-                                                <Badge pill>1</Badge>
+                                                <Badge pill>{data.length}</Badge>
                                             </div>
+                                            {cartView 
+                                                ? 
+                                                <Modal onClose={() => setCartView(false)}>
+                                                    <Cart />
+                                                </Modal> 
+                                                : 
+                                                null}
                                         </li>
                                     </>
                             }
