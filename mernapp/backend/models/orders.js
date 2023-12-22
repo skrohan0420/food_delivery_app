@@ -14,18 +14,4 @@ const OrderSchema = new Schema({
     },
 
 });
-
-router.post('/myOrderData', async (req, res) => {
-    try {
-        console.log(req.body.email)
-        let eId = await Order.findOne({ 'email': req.body.email })
-        //console.log(eId)
-        res.json({orderData:eId})
-    } catch (error) {
-        res.send("Error",error.message)
-    }
-    
-
-});
-
 module.exports = mongoose.model('order', OrderSchema)
