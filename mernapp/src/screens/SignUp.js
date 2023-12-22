@@ -30,6 +30,8 @@ function SignUp() {
         console.log(json)
         if(!json.success){
             alert('enter valid details')
+        }else{
+            localStorage.setItem("userEmail", userData.email)
         }
     }
 
